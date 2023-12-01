@@ -6,8 +6,10 @@ This repository contains the implementations of various deep learning algorithms
     - [Datasets](codes/Datasets.py)
     - [Models](codes/models)
         - [Feed Forward NN](codes/models/FeedForwardNN.py)
+        - [Convolutional Neural Network](codes/models/CNN.py)
     - [Examples](codes/examples)
         - [Linear Regression](codes/examples/LogisticRegression.py)
+        - [Multiclass Classification (CNN)](codes/examples/MultiClassClassification_CNN.py)
 
 
 ## Requirements
