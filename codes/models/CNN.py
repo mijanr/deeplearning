@@ -55,3 +55,17 @@ class CNN(nn.Module):
         """
         return self.seq(x)
     
+if __name__ == "__main__":
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    # model parameters
+    in_ch = 1
+    num_classes = 10
+
+    # create model
+    model = CNN(in_ch, num_classes).to(device)
+
+    # test the model
+    x = torch.randn(64, in_ch, 28, 28).to(device)
+    y = model(x)
+    print(y.shape)
