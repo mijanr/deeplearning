@@ -54,3 +54,18 @@ class FeedForwardNN(nn.Module):
         return out
     
 if __name__ == "__main__":
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+    
+    # model parameters
+    input_dim = 10
+    hidden_dim = 20
+    output_dim = 1
+    dropout = 0.2
+
+    # create model
+    model = FeedForwardNN(input_dim, hidden_dim, output_dim, dropout).to(device)
+
+    # test the model
+    x = torch.rand(32, input_dim).to(device)
+    y = model(x)
+    print(y.shape)
