@@ -10,29 +10,26 @@ from models import FeedForwardNN as ffnn
 
 import torch
 import torch.nn as nn
-from torch.utils.data import DataLoader, TensorDataset
 from sklearn.metrics import classification_report
 
 # load the dataset
 task = "classification"
 dataset_name = "iris"
 split = 0.7
+batch_size = 32
 
 dataset = Datasets(task=task)
-X_train, X_test, y_train, y_test = dataset.get_data(dataset_name=dataset_name, split=split)
-print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
+train_loader, test_loader = dataset.get_data(dataset_name=dataset_name, split=split, batch_size=batch_size)
 
-# datasets and dataloaders
-batch_size = 32
-train_dataset = TensorDataset(X_train, y_train)
-test_dataset = TensorDataset(X_test, y_test)
-train_loader = DataLoader(train_dataset, batch_size=batch_size, shuffle=True)
-test_loader = DataLoader(test_dataset, batch_size=batch_size, shuffle=False)
+# print the shapes of the data
+data, target = next(iter(train_loader))
+print(f"Data shape: {data.shape}")
+print(f"Target shape: {target.shape}")
 
 # define the model
-input_dim = X_train.shape[1]
+input_dim = data.shape[1]
 hidden_dim = 64
-output_dim = len(torch.unique(y_train))
+output_dim = len(torch.unique(target))
 model = ffnn.FeedForwardNN(input_dim=input_dim, hidden_dim=hidden_dim, output_dim=output_dim, dropout=0.2)
 
 # define the loss function and the optimizer
@@ -59,12 +56,14 @@ with torch.no_grad():
     correct = 0
     total = 0
     y_pred = []
+    y_test = []
     for features, labels in test_loader:
         outputs = model(features)
         _, predicted = torch.max(outputs.data, 1)
         total += labels.size(0)
         correct += (predicted == labels).sum().item()
         y_pred.extend(predicted.cpu().numpy().tolist())
+        y_test.extend(labels.cpu().numpy().tolist())
 print(f"Test Accuracy: {100*correct/total:.2f}%")
 
 # save the classification report 
