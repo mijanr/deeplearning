@@ -1,6 +1,14 @@
 # Deep Learning
 This repository contains the implementations of various deep learning algorithms and projects that I have worked on.
 
+## Contents
+- [Codes](codes)
+    - [Datasets](codes/Datasets.py)
+    - [Models](codes/models)
+        - [Feed Forward NN](codes/models/FeedForwardNN.py)
+    - [Examples](codes/examples)
+        - [Linear Regression](codes/examples/LogisticRegression.py)
+
 
 ## Requirements
 `requirements.yml` file contains the list of all the packages required to run the code in this repository. requirements.yml is generated using the following command:
