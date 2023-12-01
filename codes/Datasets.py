@@ -85,10 +85,15 @@ class Datasets:
 
 if __name__ == "__main__":
     task = "classification"
-    dataset_name = "iris"
+    dataset_name = "mnist" # "mnist", "iris"
     split = 0.7
+    batch_size = 32
 
     # load the dataset
     dataset = Datasets(task=task)
-    X_train, X_test, y_train, y_test = dataset.get_data(dataset_name=dataset_name, split=split)
-    print(X_train.shape, X_test.shape, y_train.shape, y_test.shape)
+    train_loader, test_loader = dataset.get_data(dataset_name=dataset_name, split=split, batch_size=batch_size)
+    
+    # print shapes
+    data, target = next(iter(train_loader))
+    print(f"Data shape: {data.shape}")
+    print(f"Target shape: {target.shape}")
