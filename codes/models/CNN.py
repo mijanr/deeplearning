@@ -23,19 +23,17 @@ class CNN(nn.Module):
             nn.ReLU(),
             nn.MaxPool2d(kernel_size=2),
             nn.Dropout(0.25),
-            nn.Conv2d(32, 64, kernel_size=3, padding=1),
-            nn.ReLU(),
-            nn.Conv2d(64, 64, kernel_size=3, padding=1),
-            nn.ReLU(),
-            nn.MaxPool2d(kernel_size=2),
-            nn.Dropout(0.25),
 
             # fc block
             nn.Flatten(),
             nn.LazyLinear(512),
             nn.ReLU(),
-            nn.Dropout(0.5),
-            nn.LazyLinear(num_classes)
+            nn.Dropout(0.25),
+            nn.Linear(512, 128),
+            nn.ReLU(),
+            nn.Dropout(0.25),
+            nn.Linear(128, num_classes),
+            nn.Softmax(dim=1)
         )
         
         
