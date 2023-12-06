@@ -41,3 +41,21 @@ class LSTMModel(nn.Module):
         out = self.fc(out[:, -1, :])
         return out
     
+if __name__ == "__main__":
+    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
+
+    # model parameters
+    input_dim = 28
+    hidden_dim = 128
+    output_dim = 10
+    num_layers = 2
+    dropout = 0.25
+    
+    # create model
+    model = LSTMModel(input_dim, hidden_dim, output_dim, num_layers, dropout).to(device)
+    print(model)
+    
+    # input
+    x = torch.randn(64, 28, 28).to(device)
+    print(x.shape)
+    print(model(x).shape)
