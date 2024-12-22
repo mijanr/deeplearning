@@ -13,11 +13,17 @@ This repository contains the implementations of various deep learning algorithms
 
 
 ## Requirements
-`requirements.yml` file contains the list of all the packages required to run the code in this repository. requirements.yml is generated using the following command:
+environment.yml file contains the list of all the required packages. You can create a conda environment using the following command:
+```bash
+conda env create -f environment.yml
 ```
-conda env export --no-builds | grep -v "prefix" > requirements.yml
+
+To update the environment with the latest packages, you can run the following command:
+```bash
+conda env update -f environment.yml
 ```
-To create a conda environment using the `requirements.yml` file, run the following command:
-```
-conda env create -f requirements.yml
+
+Activate the environment using the following command:
+```bash
+conda activate deepl
 ```
