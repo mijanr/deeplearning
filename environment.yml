@@ -1,0 +1,14 @@
+name: deepl
+channels:
+  - conda-forge
+  - defaults
+  - pytorch
+dependencies:
+  - python=3.12
+  - pip
+  - scikit-learn
+  - seaborn
+  - pip:
+    - torch
+    - torchvision
+  
